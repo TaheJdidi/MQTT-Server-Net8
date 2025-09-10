@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Xml.Linq;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,7 @@ namespace MQTT_Broker_Backend.Services
 {
     public class MqttService
     {
-        public int clientCount = 0;
+        public int ClientCount { get; set; }=0;
         public MqttService()
         {
         }
@@ -30,20 +32,20 @@ namespace MQTT_Broker_Backend.Services
                 server.ClientConnectedAsync += args =>
                 {
                     Console.WriteLine($"Client connected: {args.ClientId}");
-                    clientCount++;
+                    ClientCount++;
                     return Task.CompletedTask;
                 };
 
                 server.ClientDisconnectedAsync += args =>
                 {
-                    clientCount--;
+                    ClientCount--;
                     Console.WriteLine($"Client disconnected: {args.ClientId}");
                     return Task.CompletedTask;
                 };
                 await server.StartAsync();
                 return server;
             }
-            catch (Exception)
+            catch 
             {
                 throw;
             }

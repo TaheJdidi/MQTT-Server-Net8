@@ -36,7 +36,7 @@ namespace MQTT_Broker_Backend.Controllers
         [HttpGet("Clients")]
         public async Task<IActionResult> GetClientsCount()
         {
-            return Ok(new { count = _broker.clientCount });
+            return Ok(new { count = _broker.ClientCount });
         }
     }
     
